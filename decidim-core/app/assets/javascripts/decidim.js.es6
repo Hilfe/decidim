@@ -4,6 +4,8 @@
 //= require svg4everybody.min
 //= require appendAround
 
+//= require decidim/comments/comments
+
 /* globals svg4everybody */
 
 $(document).on('turbolinks:load', () => {
