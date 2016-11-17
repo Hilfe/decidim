@@ -16,7 +16,6 @@
       <%= render partial: "documents", locals: { documents: participatory_process.documents } %>
       <%= render partial: "photos", locals: { photos: participatory_process.photos } %>
     </div>
-  <% end %>
-</main>
-
+  </div>
+<% end %>
 <%= comments_for participatory_process, votable: true, arguable: false %>
