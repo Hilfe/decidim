@@ -8,3 +8,4 @@ node_modules/
 .vscode
 development_app/
 npm-debug.log
+karma-*
