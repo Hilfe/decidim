@@ -21609,7 +21609,11 @@
 	              React.createElement(
 	                "a",
 	                { className: "author__avatar" },
-	                React.createElement("img", { src: "/images/demo-avatar.jpg", alt: "" })
+	                React.createElement(
+	                  "span",
+	                  null,
+	                  "Avatar image"
+	                )
 	              ),
 	              React.createElement(
 	                "a",
