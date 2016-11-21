@@ -9,3 +9,4 @@ node_modules/
 development_app/
 npm-debug.log
 karma-*
+yarn-error.log
