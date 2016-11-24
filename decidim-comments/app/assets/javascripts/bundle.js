@@ -28719,7 +28719,7 @@
 /* 129 */
 /***/ function(module, exports) {
 
-	module.exports = "query GetComments {\n  processes {\n    id,\n    ...CommentThread\n  }\n}\n"
+	module.exports = "query GetComments {\n  comments {\n    id,\n    ...CommentThread\n  }\n}\n"
 
 /***/ },
 /* 130 */
