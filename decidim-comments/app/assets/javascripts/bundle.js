@@ -21461,11 +21461,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports['default'] = exports.Comments = undefined;
+	exports.Comments = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _templateObject = _taggedTemplateLiteral(['{\n    processes {\n      id,\n      title {\n        translation(locale: "ca")\n      }\n    }\n  }'], ['{\n    processes {\n      id,\n      title {\n        translation(locale: "ca")\n      }\n    }\n  }']);
+	var _templateObject = _taggedTemplateLiteral(['\n    query {\n      processes {\n        id\n      }\n    }\n  '], ['\n    query {\n      processes {\n        id\n      }\n    }\n  ']);
 
 	var _react = __webpack_require__(1);
 
@@ -21475,23 +21475,23 @@
 
 	var _graphqlTag2 = _interopRequireDefault(_graphqlTag);
 
-	var _apollo_client = __webpack_require__(261);
+	var _apollo_application = __webpack_require__(261);
 
-	var _apollo_client2 = _interopRequireDefault(_apollo_client);
+	var _apollo_application2 = _interopRequireDefault(_apollo_application);
 
-	var _featured_comment = __webpack_require__(262);
+	var _featured_comment = __webpack_require__(263);
 
 	var _featured_comment2 = _interopRequireDefault(_featured_comment);
 
-	var _comment_order_selector = __webpack_require__(264);
+	var _comment_order_selector = __webpack_require__(265);
 
 	var _comment_order_selector2 = _interopRequireDefault(_comment_order_selector);
 
-	var _comment_thread = __webpack_require__(265);
+	var _comment_thread = __webpack_require__(266);
 
 	var _comment_thread2 = _interopRequireDefault(_comment_thread);
 
-	var _add_comment_form = __webpack_require__(266);
+	var _add_comment_form = __webpack_require__(267);
 
 	var _add_comment_form2 = _interopRequireDefault(_add_comment_form);
 
@@ -21518,8 +21518,8 @@
 	    key: 'render',
 	    value: function () {
 	      function render() {
-	        // const { data: { processes, loading } } = this.props;
-	        // console.log(processes);
+	        var processes = this.props.data.processes;
+
 
 	        return React.createElement(
 	          'div',
@@ -21579,34 +21579,25 @@
 	  return Comments;
 	}(_react.Component);
 
+	Comments.propTypes = {
+	  data: _react.PropTypes.shape({
+	    comments: _react.PropTypes.object
+	  })
+	};
+
 	var CommentsWithData = (0, _reactApollo.compose)((0, _reactApollo.graphql)((0, _graphqlTag2['default'])(_templateObject)))(Comments);
 
-	var CommentsApplication = function (_Component2) {
-	  _inherits(CommentsApplication, _Component2);
-
+	var CommentsApplication = function () {
 	  function CommentsApplication() {
-	    _classCallCheck(this, CommentsApplication);
-
-	    return _possibleConstructorReturn(this, (CommentsApplication.__proto__ || Object.getPrototypeOf(CommentsApplication)).apply(this, arguments));
+	    return React.createElement(
+	      _apollo_application2['default'],
+	      null,
+	      React.createElement(CommentsWithData, null)
+	    );
 	  }
 
-	  _createClass(CommentsApplication, [{
-	    key: 'render',
-	    value: function () {
-	      function render() {
-	        return React.createElement(
-	          _reactApollo.ApolloProvider,
-	          { client: _apollo_client2['default'] },
-	          React.createElement(CommentsWithData, null)
-	        );
-	      }
-
-	      return render;
-	    }()
-	  }]);
-
 	  return CommentsApplication;
-	}(_react.Component);
+	}();
 
 	exports['default'] = CommentsApplication;
 
@@ -45169,6 +45160,45 @@
 	  value: true
 	});
 
+	var _react = __webpack_require__(1);
+
+	var _reactApollo = __webpack_require__(179);
+
+	var _apollo_client = __webpack_require__(262);
+
+	var _apollo_client2 = _interopRequireDefault(_apollo_client);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var ApolloApplication = function () {
+	  function ApolloApplication(_ref) {
+	    var children = _ref.children;
+	    return React.createElement(
+	      _reactApollo.ApolloProvider,
+	      { client: _apollo_client2['default'] },
+	      children
+	    );
+	  }
+
+	  return ApolloApplication;
+	}();
+
+	ApolloApplication.propTypes = {
+	  children: _react.PropTypes.element.isRequired
+	};
+
+	exports['default'] = ApolloApplication;
+
+/***/ },
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _apolloClient = __webpack_require__(187);
 
 	var _apolloClient2 = _interopRequireDefault(_apolloClient);
@@ -45182,7 +45212,7 @@
 	exports['default'] = client;
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45191,7 +45221,7 @@
 	  value: true
 	});
 
-	var _comment = __webpack_require__(263);
+	var _comment = __webpack_require__(264);
 
 	var _comment2 = _interopRequireDefault(_comment);
 
@@ -45221,7 +45251,7 @@
 	exports["default"] = FeaturedComment;
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -45345,7 +45375,7 @@
 	exports["default"] = Comment;
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -45416,7 +45446,7 @@
 	exports["default"] = CommentOrderSelector;
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -45425,7 +45455,7 @@
 	  value: true
 	});
 
-	var _comment = __webpack_require__(263);
+	var _comment = __webpack_require__(264);
 
 	var _comment2 = _interopRequireDefault(_comment);
 
@@ -45460,7 +45490,7 @@
 	exports["default"] = CommentThread;
 
 /***/ },
-/* 266 */
+/* 267 */
 /***/ function(module, exports) {
 
 	"use strict";

@@ -25,8 +25,6 @@ require "cancancan"
 require "truncato"
 require "file_validators"
 
-require "decidim/comments"
-
 module Decidim
   module Core
     # Decidim's core Rails Engine.
