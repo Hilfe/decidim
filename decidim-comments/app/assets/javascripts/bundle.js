@@ -21465,7 +21465,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _templateObject = _taggedTemplateLiteral(['\n    query {\n      processes {\n        id\n      }\n    }\n  '], ['\n    query {\n      processes {\n        id\n      }\n    }\n  ']);
+	var _templateObject = _taggedTemplateLiteral(['\n    query GetProcesses {\n      processes {\n        id\n      }\n    }\n  '], ['\n    query GetProcesses {\n      processes {\n        id\n      }\n    }\n  ']);
 
 	var _react = __webpack_require__(1);
 
@@ -21518,12 +21518,17 @@
 	    key: 'render',
 	    value: function () {
 	      function render() {
-	        var processes = this.props.data.processes;
+	        var comments = this.props.comments;
 
 
 	        return React.createElement(
 	          'div',
 	          { className: 'columns large-9', id: 'comments' },
+	          React.createElement(
+	            'p',
+	            null,
+	            JSON.stringify(comments)
+	          ),
 	          React.createElement(_featured_comment2['default'], null),
 	          React.createElement(
 	            'section',
@@ -21552,7 +21557,7 @@
 	              ),
 	              React.createElement(_comment_order_selector2['default'], null)
 	            ),
-	            React.createElement(_comment_thread2['default'], null),
+	            this._renderCommentThreads(),
 	            React.createElement(
 	              'div',
 	              { className: 'show-more show-more--comment-thread' },
@@ -21574,18 +21579,44 @@
 
 	      return render;
 	    }()
+	  }, {
+	    key: '_renderCommentThreads',
+	    value: function () {
+	      function _renderCommentThreads() {
+	        var comments = this.props.comments;
+
+
+	        return comments.map(function (comment) {
+	          return React.createElement(_comment_thread2['default'], { key: comment.id, comment: comment });
+	        });
+	      }
+
+	      return _renderCommentThreads;
+	    }()
 	  }]);
 
 	  return Comments;
 	}(_react.Component);
 
 	Comments.propTypes = {
-	  data: _react.PropTypes.shape({
-	    comments: _react.PropTypes.object
-	  })
+	  comments: _react.PropTypes.arrayOf(_react.PropTypes.object)
 	};
 
-	var CommentsWithData = (0, _reactApollo.compose)((0, _reactApollo.graphql)((0, _graphqlTag2['default'])(_templateObject)))(Comments);
+	var CommentsWithData = (0, _reactApollo.compose)((0, _reactApollo.graphql)((0, _graphqlTag2['default'])(_templateObject), {
+	  props: function () {
+	    function props(_ref) {
+	      var _ref$data = _ref.data,
+	          loading = _ref$data.loading,
+	          processes = _ref$data.processes;
+	      return {
+	        loading: loading,
+	        comments: processes || []
+	      };
+	    }
+
+	    return props;
+	  }()
+	}))(Comments);
 
 	var CommentsApplication = function () {
 	  function CommentsApplication() {
