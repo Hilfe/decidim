@@ -14,6 +14,18 @@ module Decidim
           ctx[:current_organization].participatory_processes
         }
       end
+
+      field :comments do
+        type !types[ CommentType]
+        description "Lists all comments."
+
+        resolve -> (_obj, _args, ctx) {
+          [
+            Decidim::Comments::Comment.new(id: "1", body: "Comment body 1"),
+            Decidim::Comments::Comment.new(id: "2", body: "Comment body 2")
+          ]
+        }
+      end
     end
   end
 end
