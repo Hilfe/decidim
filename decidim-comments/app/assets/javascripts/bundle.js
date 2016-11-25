@@ -86,14 +86,6 @@
 
 	var _apollo_application2 = _interopRequireDefault(_apollo_application);
 
-	var _featured_comment = __webpack_require__(123);
-
-	var _featured_comment2 = _interopRequireDefault(_featured_comment);
-
-	var _comment_order_selector = __webpack_require__(125);
-
-	var _comment_order_selector2 = _interopRequireDefault(_comment_order_selector);
-
 	var _comment_thread = __webpack_require__(126);
 
 	var _comment_thread2 = _interopRequireDefault(_comment_thread);
@@ -129,10 +121,12 @@
 	    key: 'render',
 	    value: function () {
 	      function render() {
+	        var comments = this.props.comments;
+
+
 	        return React.createElement(
 	          'div',
 	          { className: 'columns large-9', id: 'comments' },
-	          React.createElement(_featured_comment2['default'], null),
 	          React.createElement(
 	            'section',
 	            { className: 'comments' },
@@ -142,39 +136,10 @@
 	              React.createElement(
 	                'h2',
 	                { className: 'order-by__text section-heading' },
-	                '132 comentaris -',
-	                React.createElement(
-	                  'span',
-	                  { className: 'order-by__tabs' },
-	                  React.createElement(
-	                    'a',
-	                    { className: 'order-by__tab' },
-	                    'a favor'
-	                  ),
-	                  React.createElement(
-	                    'a',
-	                    { className: 'order-by__tab' },
-	                    'en contra'
-	                  )
-	                )
-	              ),
-	              React.createElement(_comment_order_selector2['default'], null)
-	            ),
-	            this._renderCommentThreads(),
-	            React.createElement(
-	              'div',
-	              { className: 'show-more show-more--comment-thread' },
-	              React.createElement(
-	                'button',
-	                { className: 'muted-link' },
-	                'Ver 16 comentarios m\xE1s',
-	                React.createElement(
-	                  'span',
-	                  { 'aria-hidden': 'true' },
-	                  '+'
-	                )
+	                comments.length + ' comments'
 	              )
 	            ),
+	            this._renderCommentThreads(),
 	            React.createElement(_add_comment_form2['default'], null)
 	          )
 	        );
@@ -206,18 +171,16 @@
 
 	Comments.propTypes = {
 	  comments: _react.PropTypes.arrayOf(_react.PropTypes.shape({
-	    id: _react.PropTypes.string.isRequired
-	  })).isRequired
+	    id: _react.PropTypes.string.isRequired,
+	    body: _react.PropTypes.string.isRequired
+	  }))
 	};
 
 	var CommentsWithData = (0, _reactApollo.compose)((0, _reactApollo.graphql)((0, _graphqlTag2['default'])(_templateObject, _commentsQuery2['default'], _comment_thread2['default'].fragments.comment), {
 	  props: function () {
 	    function props(_ref) {
-	      var _ref$data = _ref.data,
-	          loading = _ref$data.loading,
-	          comments = _ref$data.comments;
+	      var comments = _ref.data.comments;
 	      return {
-	        loading: loading,
 	        comments: comments || []
 	      };
 	    }
@@ -28355,45 +28318,7 @@
 	exports['default'] = client;
 
 /***/ },
-/* 123 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _comment = __webpack_require__(124);
-
-	var _comment2 = _interopRequireDefault(_comment);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-	var FeaturedComment = function () {
-	  function FeaturedComment() {
-	    return React.createElement(
-	      "section",
-	      { className: "comments" },
-	      React.createElement(
-	        "h4",
-	        { className: "section-heading" },
-	        "Comentario destacado"
-	      ),
-	      React.createElement(
-	        "div",
-	        { className: "comment-thread comment--pinned" },
-	        React.createElement(_comment2["default"], null)
-	      )
-	    );
-	  }
-
-	  return FeaturedComment;
-	}();
-
-	exports["default"] = FeaturedComment;
-
-/***/ },
+/* 123 */,
 /* 124 */
 /***/ function(module, exports) {
 
@@ -28518,77 +28443,7 @@
 	exports["default"] = Comment;
 
 /***/ },
-/* 125 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var CommentOrderSelector = function () {
-	  function CommentOrderSelector() {
-	    return React.createElement(
-	      "div",
-	      { className: "order-by__dropdown order-by__dropdown--right" },
-	      React.createElement(
-	        "span",
-	        { className: "order-by__text" },
-	        "Ordenar per:"
-	      ),
-	      React.createElement(
-	        "ul",
-	        { className: "dropdown menu", "data-dropdown-menu": true },
-	        React.createElement(
-	          "li",
-	          null,
-	          React.createElement(
-	            "a",
-	            null,
-	            "M\xE9s votats"
-	          ),
-	          React.createElement(
-	            "ul",
-	            { className: "menu" },
-	            React.createElement(
-	              "li",
-	              null,
-	              React.createElement(
-	                "a",
-	                null,
-	                "M\xE9s votats"
-	              )
-	            ),
-	            React.createElement(
-	              "li",
-	              null,
-	              React.createElement(
-	                "a",
-	                null,
-	                "M\xE9s nous"
-	              )
-	            ),
-	            React.createElement(
-	              "li",
-	              null,
-	              React.createElement(
-	                "a",
-	                null,
-	                "M\xE9s antics"
-	              )
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-
-	  return CommentOrderSelector;
-	}();
-
-	exports["default"] = CommentOrderSelector;
-
-/***/ },
+/* 125 */,
 /* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
