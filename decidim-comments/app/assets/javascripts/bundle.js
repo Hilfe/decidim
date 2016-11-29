@@ -28393,6 +28393,8 @@
 
 	var _templateObject = _taggedTemplateLiteral(['\n    ', '\n  '], ['\n    ', '\n  ']);
 
+	var _graphqlAnywhere = __webpack_require__(116);
+
 	var _graphqlTag = __webpack_require__(114);
 
 	var _graphqlTag2 = _interopRequireDefault(_graphqlTag);
@@ -28409,7 +28411,11 @@
 	// comment--nested--alt
 	// comment--highlight
 	var Comment = function () {
-	  function Comment() {
+	  function Comment(_ref) {
+	    var _ref$comment = _ref.comment,
+	        author = _ref$comment.author,
+	        body = _ref$comment.body,
+	        createdAt = _ref$comment.createdAt;
 	    return React.createElement(
 	      'article',
 	      { className: 'comment' },
@@ -28427,32 +28433,14 @@
 	              { className: 'author author--inline' },
 	              React.createElement(
 	                'a',
-	                { className: 'author__avatar' },
-	                React.createElement(
-	                  'span',
-	                  null,
-	                  'Avatar image'
-	                )
-	              ),
-	              React.createElement(
-	                'a',
 	                { className: 'author__name' },
-	                'Marc Serres'
+	                author.name
 	              ),
 	              React.createElement(
 	                'time',
-	                { dateTime: '2016-08-01T19:47Z' },
-	                '1-08-2016 21:47'
+	                { dateTime: '{createdAt}' },
+	                createdAt
 	              )
-	            )
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'author-data__extra' },
-	            React.createElement(
-	              'a',
-	              null,
-	              'Flag'
 	            )
 	          )
 	        )
@@ -28463,53 +28451,7 @@
 	        React.createElement(
 	          'p',
 	          null,
-	          React.createElement(
-	            'span',
-	            { className: 'success label' },
-	            'A favor'
-	          ),
-	          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'comment__footer' },
-	        React.createElement('button', { className: 'comment__reply muted-link', 'data-toggle': 'comment1-reply' }),
-	        React.createElement(
-	          'div',
-	          { className: 'comment__votes' },
-	          React.createElement(
-	            'a',
-	            { className: 'comment__votes--up' },
-	            '257'
-	          ),
-	          React.createElement(
-	            'a',
-	            { className: 'comment__votes--down' },
-	            '257'
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        {
-	          className: 'add-comment add-comment--reply',
-	          id: 'comment1-reply',
-	          'data-toggler': '.is-active'
-	        },
-	        React.createElement(
-	          'form',
-	          null,
-	          React.createElement(
-	            'label',
-	            { className: 'show-for-sr', htmlFor: 'add-comment-1' },
-	            'Resposta'
-	          ),
-	          React.createElement('textarea', {
-	            id: 'add-comment-1',
-	            placeholder: 'Respon a aquest comentari'
-	          }),
-	          React.createElement('input', { type: 'submit', className: 'button small hollow', value: 'Enviar' })
+	          body
 	        )
 	      )
 	    );
@@ -28522,19 +28464,23 @@
 	  comment: (0, _graphqlTag2['default'])(_templateObject, _commentFragment2['default'])
 	};
 
+	Comment.propTypes = {
+	  comment: (0, _graphqlAnywhere.propType)(Comment.fragments.comment).isRequired
+	};
+
 	exports['default'] = Comment;
 
 /***/ },
 /* 125 */
 /***/ function(module, exports) {
 
-	module.exports = "fragment Comment on Comment {\n  body\n}"
+	module.exports = "fragment Comment on Comment {\n  body\n  createdAt\n  author {\n    name\n  }\n}"
 
 /***/ },
 /* 126 */
 /***/ function(module, exports) {
 
-	module.exports = "fragment CommentThread on Comment {\n  author {\n    name\n  },\n  ...Comment\n}\n"
+	module.exports = "fragment CommentThread on Comment {\n  author {\n    name\n  }\n  ...Comment\n}\n"
 
 /***/ },
 /* 127 */
@@ -28596,7 +28542,7 @@
 /* 128 */
 /***/ function(module, exports) {
 
-	module.exports = "query GetComments {\n  comments {\n    id,\n    ...CommentThread\n  }\n}\n"
+	module.exports = "query GetComments {\n  comments {\n    id\n    ...CommentThread\n  }\n}\n"
 
 /***/ },
 /* 129 */
