@@ -13,12 +13,47 @@ module Decidim
       let(:resource) { DummyResource.new }
 
       describe "comments_for" do
-        it "should render the react component `Comments` with the correct data" do
-          expect(helper)
-            .to receive(:react_component)
-            .with("Comments", resource_type: "decidim/comments/dummy_resource", resource_id: 1, votable: true, arguable: false)
+        context "if user is not logged in" do
+          before :each do
+            allow(helper).to receive(:current_user).and_return(nil)
+          end
 
-          helper.comments_for(resource, votable: true, arguable: false)
+          it "should render the react component `Comments` with the correct data" do
+            expect(helper)
+              .to receive(:react_component)
+              .with("Comments", {
+                resourceType: "decidim/comments/dummy_resource",
+                resourceId: 1,
+                session: nil
+              })
+
+            helper.comments_for(resource)
+          end
+        end
+
+        context "if user is logged in" do
+          let(:user) { create(:user) }
+
+          before :each do
+            allow(helper).to receive(:current_user).and_return(user)
+          end
+
+          it "should render the react component `Comments` with the correct data" do
+            expect(helper)
+              .to receive(:react_component)
+              .with("Comments", {
+                resourceType: "decidim/comments/dummy_resource",
+                resourceId: 1,
+                session: {
+                  currentUser: {
+                    id: user.id,
+                    name: user.name
+                  }
+                }
+              })
+
+            helper.comments_for(resource)
+          end
         end
       end
     end

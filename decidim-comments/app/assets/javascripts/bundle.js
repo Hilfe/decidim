@@ -140,7 +140,7 @@
 	              )
 	            ),
 	            this._renderCommentThreads(),
-	            React.createElement(_add_comment_form2['default'], null)
+	            this._renderAddCommentForm()
 	          )
 	        );
 	      }
@@ -164,6 +164,22 @@
 
 	      return _renderCommentThreads;
 	    }()
+	  }, {
+	    key: '_renderAddCommentForm',
+	    value: function () {
+	      function _renderAddCommentForm() {
+	        var session = this.props.session;
+
+
+	        if (session && session.currentUser) {
+	          return React.createElement(_add_comment_form2['default'], null);
+	        }
+
+	        return null;
+	      }
+
+	      return _renderAddCommentForm;
+	    }()
 	  }]);
 
 	  return Comments;
@@ -172,7 +188,13 @@
 	Comments.propTypes = {
 	  comments: _react.PropTypes.arrayOf(_react.PropTypes.shape({
 	    id: _react.PropTypes.string.isRequired
-	  }))
+	  })),
+	  session: _react.PropTypes.shape({
+	    currentUser: _react.PropTypes.shape({
+	      id: _react.PropTypes.string.isRequired,
+	      name: _react.PropTypes.string.isRequired
+	    }).isRequired
+	  })
 	};
 
 	var CommentsWithData = (0, _reactApollo.compose)((0, _reactApollo.graphql)((0, _graphqlTag2['default'])(_templateObject, _commentsQuery2['default'], _comment_thread2['default'].fragments.comment), {
