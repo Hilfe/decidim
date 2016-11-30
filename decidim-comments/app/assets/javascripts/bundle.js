@@ -28407,9 +28407,6 @@
 
 	function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-	// comment--nested
-	// comment--nested--alt
-	// comment--highlight
 	var Comment = function () {
 	  function Comment(_ref) {
 	    var _ref$comment = _ref.comment,
@@ -28484,59 +28481,135 @@
 
 /***/ },
 /* 127 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var AddCommentForm = function () {
-	  function AddCommentForm() {
-	    return React.createElement(
-	      "div",
-	      { className: "add-comment" },
-	      React.createElement(
-	        "h5",
-	        { className: "section-heading" },
-	        "Deixa el teu comentari"
-	      ),
-	      React.createElement(
-	        "div",
-	        { className: "opinion-toggle button-group" },
-	        React.createElement(
-	          "button",
-	          { className: "button small button--muted opinion-toggle--ok" },
-	          "Estic a favor"
-	        ),
-	        React.createElement(
-	          "button",
-	          { className: "button small button--muted opinion-toggle--ko" },
-	          "Estic en contra"
-	        )
-	      ),
-	      React.createElement(
-	        "form",
-	        null,
-	        React.createElement(
-	          "label",
-	          { className: "show-for-sr", htmlFor: "add-comment" },
-	          "Comentari"
-	        ),
-	        React.createElement("textarea", {
-	          id: "add-comment",
-	          rows: "4",
-	          placeholder: "Qu\xE8 opines d'aquesta proposta?"
-	        }),
-	        React.createElement("input", { type: "submit", className: "button button--sc", value: "Enviar" })
-	      )
-	    );
+	exports["default"] = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint-disable no-return-assign */
+
+
+	var AddCommentForm = function (_Component) {
+	  _inherits(AddCommentForm, _Component);
+
+	  function AddCommentForm(props) {
+	    _classCallCheck(this, AddCommentForm);
+
+	    var _this = _possibleConstructorReturn(this, (AddCommentForm.__proto__ || Object.getPrototypeOf(AddCommentForm)).call(this, props));
+
+	    _this.state = {
+	      disabled: true
+	    };
+	    return _this;
 	  }
 
+	  _createClass(AddCommentForm, [{
+	    key: "render",
+	    value: function () {
+	      function render() {
+	        var _this2 = this;
+
+	        var disabled = this.state.disabled;
+
+
+	        return React.createElement(
+	          "div",
+	          { className: "add-comment" },
+	          React.createElement(
+	            "h5",
+	            { className: "section-heading" },
+	            "Deixa el teu comentari"
+	          ),
+	          React.createElement(
+	            "form",
+	            { onSubmit: function () {
+	                function onSubmit(evt) {
+	                  return _this2._addComment(evt);
+	                }
+
+	                return onSubmit;
+	              }() },
+	            React.createElement(
+	              "label",
+	              { className: "show-for-sr", htmlFor: "add-comment" },
+	              "Comentari"
+	            ),
+	            React.createElement("textarea", {
+	              ref: function () {
+	                function ref(textarea) {
+	                  return _this2.bodyTextArea = textarea;
+	                }
+
+	                return ref;
+	              }(),
+	              id: "add-comment",
+	              rows: "4",
+	              placeholder: "Qu\xE8 opines d'aquesta proposta?",
+	              onChange: function () {
+	                function onChange(evt) {
+	                  return _this2._checkCommentBody(evt.target.value);
+	                }
+
+	                return onChange;
+	              }()
+	            }),
+	            React.createElement("input", {
+	              type: "submit",
+	              className: "button button--sc",
+	              value: "Enviar",
+	              disabled: disabled
+	            })
+	          )
+	        );
+	      }
+
+	      return render;
+	    }()
+	  }, {
+	    key: "_checkCommentBody",
+	    value: function () {
+	      function _checkCommentBody(body) {
+	        this.setState({ disabled: body === '' });
+	      }
+
+	      return _checkCommentBody;
+	    }()
+	  }, {
+	    key: "_addComment",
+	    value: function () {
+	      function _addComment(evt) {
+	        var addComment = this.props.addComment;
+
+	        addComment({ body: this.bodyTextArea.value });
+	        this.bodyTextArea.value = '';
+	        evt.preventDefault();
+	      }
+
+	      return _addComment;
+	    }()
+	  }]);
+
 	  return AddCommentForm;
-	}();
+	}(_react.Component);
 
 	exports["default"] = AddCommentForm;
+
+
+	AddCommentForm.propTypes = {
+	  addComment: _react.PropTypes.func.isRequired
+	};
 
 /***/ },
 /* 128 */
