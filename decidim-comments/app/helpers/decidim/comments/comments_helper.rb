@@ -11,7 +11,7 @@ module Decidim
 
         react_component("Comments", options.merge!(
           commentableType: resource.class.name,
-          commentableId: resource.id,
+          commentableId: resource.id.to_s,
           session: session
         ))
       end

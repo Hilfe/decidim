@@ -23,7 +23,7 @@ module Decidim
               .to receive(:react_component)
               .with("Comments", {
                 commentableType: "Decidim::Comments::DummyCommentable",
-                commentableId: 1,
+                commentableId: "1",
                 session: nil
               })
 
@@ -43,7 +43,7 @@ module Decidim
               .to receive(:react_component)
               .with("Comments", {
                 commentableType: "Decidim::Comments::DummyCommentable",
-                commentableId: 1,
+                commentableId: "1",
                 session: {
                   currentUser: {
                     id: user.id,
