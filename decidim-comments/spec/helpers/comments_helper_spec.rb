@@ -4,13 +4,13 @@ require "spec_helper"
 module Decidim
   module Comments
     describe CommentsHelper do
-      class DummyResource
+      class DummyCommentable
         def id
           1
         end
       end
 
-      let(:resource) { DummyResource.new }
+      let(:commentable) { DummyCommentable.new }
 
       describe "comments_for" do
         context "if user is not logged in" do
@@ -22,12 +22,12 @@ module Decidim
             expect(helper)
               .to receive(:react_component)
               .with("Comments", {
-                resourceType: "decidim/comments/dummy_resource",
-                resourceId: 1,
+                commentableType: "Decidim::Comments::DummyCommentable",
+                commentableId: 1,
                 session: nil
               })
 
-            helper.comments_for(resource)
+            helper.comments_for(commentable)
           end
         end
 
@@ -42,8 +42,8 @@ module Decidim
             expect(helper)
               .to receive(:react_component)
               .with("Comments", {
-                resourceType: "decidim/comments/dummy_resource",
-                resourceId: 1,
+                commentableType: "Decidim::Comments::DummyCommentable",
+                commentableId: 1,
                 session: {
                   currentUser: {
                     id: user.id,
@@ -52,7 +52,7 @@ module Decidim
                 }
               })
 
-            helper.comments_for(resource)
+            helper.comments_for(commentable)
           end
         end
       end

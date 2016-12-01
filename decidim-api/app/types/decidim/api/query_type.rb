@@ -16,11 +16,16 @@ module Decidim
       end
 
       field :comments do
-        type !types[Decidim::Comments::CommentType]
         description "Lists all comments."
+        type !types[Decidim::Comments::CommentType]
+        argument :commentableId, !types.String
+        argument :commentableType, !types.String
 
-        resolve -> (_obj, _args, ctx) {
-          Decidim::Comments::Comment.all
+        resolve -> (_obj, args, ctx) {
+          Decidim::Comments::Comment
+            .where(commentable_id: args[:commentableId])
+            .where(commentable_type: args[:commentableType])
+            .all
         }
       end
     end

@@ -211,11 +211,17 @@
 
 	var CommentsApplication = function () {
 	  function CommentsApplication(_ref2) {
-	    var session = _ref2.session;
+	    var session = _ref2.session,
+	        commentableId = _ref2.commentableId,
+	        commentableType = _ref2.commentableType;
 	    return React.createElement(
 	      _apollo_application2['default'],
 	      null,
-	      React.createElement(CommentsWithData, { session: session })
+	      React.createElement(CommentsWithData, {
+	        session: session,
+	        commentableId: commentableId,
+	        commentableType: commentableType
+	      })
 	    );
 	  }
 
@@ -225,7 +231,9 @@
 	CommentsApplication.propTypes = {
 	  session: _react.PropTypes.shape({
 	    currentUser: _react.PropTypes.object.isRequired
-	  })
+	  }),
+	  commentableId: React.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number]),
+	  commentableType: _react.PropTypes.string.isRequired
 	};
 
 	exports['default'] = CommentsApplication;
@@ -48169,7 +48177,7 @@
 /* 238 */
 /***/ function(module, exports) {
 
-	module.exports = "query GetComments {\n  comments {\n    id\n    ...CommentThread\n  }\n}\n"
+	module.exports = "query GetComments($commentableId: String!, $commentableType: String!) {\n  comments(commentableId: $commentableId, commentableType: $commentableType) {\n    id\n    ...CommentThread\n  }\n}\n"
 
 /***/ },
 /* 239 */

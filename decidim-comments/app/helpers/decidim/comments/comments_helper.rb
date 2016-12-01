@@ -10,8 +10,8 @@ module Decidim
         end
 
         react_component("Comments", options.merge!(
-          resourceType: resource.class.name.underscore,
-          resourceId: resource.id,
+          commentableType: resource.class.name,
+          commentableId: resource.id,
           session: session
         ))
       end
