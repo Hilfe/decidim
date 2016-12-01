@@ -5,6 +5,7 @@ module Decidim
 
       included do
         let!(:current_organization) { create(:organization) }
+        let!(:current_user) { create(:user, organization: current_organization) }
         let(:model) { OpenStruct.new({}) }
 
         let(:schema) do
@@ -33,7 +34,8 @@ module Decidim
         result = schema.execute(
           query,
           context: {
-            current_organization: current_organization
+            current_organization: current_organization,
+            current_user: current_user
           },
           variables: variables
         )

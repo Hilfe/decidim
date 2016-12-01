@@ -168,11 +168,18 @@
 	    key: '_renderAddCommentForm',
 	    value: function () {
 	      function _renderAddCommentForm() {
-	        var session = this.props.session;
+	        var _props = this.props,
+	            session = _props.session,
+	            commentableId = _props.commentableId,
+	            commentableType = _props.commentableType;
 
 
 	        if (session && session.currentUser) {
-	          return React.createElement(_add_comment_form2['default'], { session: session });
+	          return React.createElement(_add_comment_form2['default'], {
+	            session: session,
+	            commentableId: commentableId,
+	            commentableType: commentableType
+	          });
 	        }
 
 	        return null;
@@ -191,7 +198,9 @@
 	  })),
 	  session: _react.PropTypes.shape({
 	    currentUser: _react.PropTypes.object.isRequired
-	  })
+	  }),
+	  commentableId: _react.PropTypes.string.isRequired,
+	  commentableType: _react.PropTypes.string.isRequired
 	};
 
 	var CommentsWithData = (0, _reactApollo.compose)((0, _reactApollo.graphql)((0, _graphqlTag2['default'])(_templateObject, _commentsQuery2['default'], _comment_thread2['default'].fragments.comment), {
@@ -201,7 +210,9 @@
 	          comments = _ref.data.comments;
 	      return {
 	        comments: comments || [],
-	        session: ownProps.session
+	        session: ownProps.session,
+	        commentableId: ownProps.commentableId,
+	        commentableType: ownProps.commentableType
 	      };
 	    }
 
@@ -28689,7 +28700,9 @@
 	      id: React.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.number]),
 	      name: _react.PropTypes.string.isRequired
 	    }).isRequired
-	  }).isRequired
+	  }).isRequired,
+	  commentableId: _react.PropTypes.string.isRequired,
+	  commentableType: _react.PropTypes.string.isRequired
 	};
 
 	var AddCommentFormWithMutation = (0, _reactApollo.graphql)((0, _graphqlTag2['default'])(_templateObject, _add_comment_formMutation2['default']), {
@@ -28702,7 +28715,11 @@
 	          function addComment(_ref2) {
 	            var body = _ref2.body;
 	            return mutate({
-	              variables: { body: body },
+	              variables: {
+	                commentableId: ownProps.commentableId,
+	                commentableType: ownProps.commentableType,
+	                body: body
+	              },
 	              optimisticResponse: {
 	                __typename: 'Mutation',
 	                addComment: {
@@ -48171,7 +48188,7 @@
 /* 237 */
 /***/ function(module, exports) {
 
-	module.exports = "mutation addComment($body: String!)  {\n  addComment(body: $body) {\n    id,\n    body,\n    createdAt,\n    author {\n      name\n    }\n  }\n}"
+	module.exports = "mutation addComment($commentableId: String!, $commentableType: String!, $body: String!)  {\n  addComment(commentableId: $commentableId, commentableType: $commentableType, body: $body) {\n    id,\n    body,\n    createdAt,\n    author {\n      name\n    }\n  }\n}"
 
 /***/ },
 /* 238 */
