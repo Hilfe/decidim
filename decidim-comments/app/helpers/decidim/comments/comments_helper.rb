@@ -4,15 +4,15 @@ module Decidim
     module CommentsHelper
       def comments_for(resource, options = {})
         session = if current_user.present?
-          {
-            currentUser: current_user.attributes.slice("id", "name").symbolize_keys
-          }
+                    {
+                      currentUser: current_user.attributes.slice("id", "name").symbolize_keys
+                    }
         end
 
         react_component("Comments", options.merge!(
-          commentableType: resource.class.name,
-          commentableId: resource.id.to_s,
-          session: session
+                                      commentableType: resource.class.name,
+                                      commentableId: resource.id.to_s,
+                                      session: session
         ))
       end
     end
