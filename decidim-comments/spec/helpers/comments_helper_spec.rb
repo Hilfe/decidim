@@ -24,7 +24,9 @@ module Decidim
               .with("Comments", {
                 commentableType: "Decidim::Comments::DummyCommentable",
                 commentableId: "1",
-                session: nil
+                session: {
+                  locale: I18n.locale
+                }
               })
 
             helper.comments_for(commentable)
@@ -48,7 +50,8 @@ module Decidim
                   currentUser: {
                     id: user.id,
                     name: user.name
-                  }
+                  },
+                  locale: I18n.locale
                 }
               })
 
