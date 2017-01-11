@@ -6,7 +6,8 @@ vendor/bundle
 .DS_Store
 node_modules/
 .vscode
-development_app/
+development_app/config/database.yml
+development_app/config/secrets.yml
 .projectile
 docker_development_app/
 npm-debug.log
