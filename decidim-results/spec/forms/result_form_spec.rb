@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # frozen_literal_string: true
 
 require "spec_helper"
@@ -27,7 +29,7 @@ describe Decidim::Results::Admin::ResultForm do
       decidim_scope_id: scope_id,
       decidim_category_id: category_id,
       title_en: title[:en],
-      description_en: description[:en],
+      description_en: description[:en]
     }
   end
 

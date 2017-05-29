@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "decidim/faker/localized"
 require "decidim/dev"
 
@@ -86,9 +87,12 @@ FactoryGirl.define do
     end
 
     trait :with_steps do
-      after(:create) do |participatory_process, _evaluator|
+      transient { current_step_ends 1.month.from_now }
+
+      after(:create) do |participatory_process, evaluator|
         create(:participatory_process_step,
                active: true,
+               end_date: evaluator.current_step_ends,
                participatory_process: participatory_process)
         participatory_process.reload
         participatory_process.steps.reload

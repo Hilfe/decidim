@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # frozen_string_literal: true
+
 RSpec.shared_examples "manage moderations" do
   let!(:moderations) do
     reportables.first(reportables.length - 1).map do |reportable|
@@ -38,7 +39,7 @@ RSpec.shared_examples "manage moderations" do
       click_link "Moderations"
 
       within "tr[data-id=\"#{moderation.id}\"]" do
-        click_link "Unreport"
+        find("a.action-icon--unreport").click
       end
 
       within ".callout-wrapper" do
@@ -50,7 +51,7 @@ RSpec.shared_examples "manage moderations" do
       click_link "Moderations"
 
       within "tr[data-id=\"#{moderation.id}\"]" do
-        click_link "Hide"
+        find("a.action-icon--hide").click
       end
 
       within ".callout-wrapper" do

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Decidim
   module Comments
     # Some resources will be configured as commentable objects so users can
@@ -19,8 +20,8 @@ module Decidim
 
       belongs_to :commentable, foreign_key: "decidim_commentable_id", foreign_type: "decidim_commentable_type", polymorphic: true
       belongs_to :root_commentable, foreign_key: "decidim_root_commentable_id", foreign_type: "decidim_root_commentable_type", polymorphic: true
-      has_many :up_votes, -> { where(weight: 1) }, foreign_key: "decidim_comment_id", class_name: CommentVote, dependent: :destroy
-      has_many :down_votes, -> { where(weight: -1) }, foreign_key: "decidim_comment_id", class_name: CommentVote, dependent: :destroy
+      has_many :up_votes, -> { where(weight: 1) }, foreign_key: "decidim_comment_id", class_name: "CommentVote", dependent: :destroy
+      has_many :down_votes, -> { where(weight: -1) }, foreign_key: "decidim_comment_id", class_name: "CommentVote", dependent: :destroy
 
       validates :author, :commentable, :root_commentable, :body, presence: true
       validates :depth, numericality: { greater_than_or_equal_to: 0 }
@@ -53,7 +54,7 @@ module Decidim
 
       # Public: Overrides the `reported_content` Reportable concern method.
       def reported_content
-        "<p>#{body}</p>"
+        body
       end
 
       private

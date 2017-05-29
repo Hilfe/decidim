@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_dependency "decidim/application_controller"
 
 module Decidim
@@ -28,19 +29,19 @@ module Decidim
     private
 
     def collection
-      @collection ||= public_processes.collection
+      @collection ||= (participatory_processes.to_a + participatory_process_groups).flatten
     end
 
     def participatory_processes
-      @participatory_processes ||= public_processes.participatory_processes
+      @participatory_processes ||= OrganizationPrioritizedParticipatoryProcesses.new(current_organization)
     end
 
     def promoted_participatory_processes
-      @promoted_processes ||= participatory_processes.promoted
+      @promoted_processes ||= participatory_processes | PromotedParticipatoryProcesses.new
     end
 
-    def public_processes
-      @public_processes ||= PublicProcesses.new(current_organization)
+    def participatory_process_groups
+      @process_groups ||= Decidim::ParticipatoryProcessGroup.where(organization: current_organization)
     end
   end
 end

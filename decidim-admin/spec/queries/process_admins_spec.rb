@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 describe Decidim::Admin::ProcessAdmins do
   let(:organization) { create :organization }
-  let(:participatory_process) { create :participatory_process, organization: organization}
+  let(:participatory_process) { create :participatory_process, organization: organization }
   let!(:admin) { create(:user, :admin, :confirmed, organization: organization) }
   let!(:participatory_process_admin) do
     user = create(:user, :confirmed, organization: organization)

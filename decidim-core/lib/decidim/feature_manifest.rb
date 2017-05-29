@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 require_dependency "decidim/features/settings_manifest"
+require_dependency "decidim/features/export_manifest"
 
 module Decidim
   # This class handles all the logic associated to configuring a feature
@@ -21,6 +23,11 @@ module Decidim
     # mix this engine's stylesheets with the main app's stylesheets so it can
     # use the scss variables and mixins provided by Decidim::Core.
     attribute :stylesheet, String, default: nil
+
+    # A path with the `scss` admin stylesheet this engine provides. It is used
+    # to mix this engine's stylesheets with the main app's admin stylesheets so
+    # it can use the scss variables and mixins provided by Decidim::Admin.
+    attribute :admin_stylesheet, String, default: nil
 
     # A String with the feature's icon. The icon must be stored in the
     # engine's assets path.
@@ -128,6 +135,36 @@ module Decidim
       resource_manifests << manifest
     end
 
+    # Public: Registers an export artifact with a name and its properties
+    # defined in `Decidim::Features::ExportManifest`.
+    #
+    # Export artifacts provide an unified way for features to register
+    # exportable collections serialized via a `Serializer` than eventually
+    # are transformed to their formats.
+    #
+    # name  - The name of the artifact. Should be unique in the context of
+    #         the feature.
+    # block - A block that receives the manifest as its only argument.
+    #
+    # Returns nothing.
+    def exports(name, &block)
+      @exports ||= []
+      @exports << [name, block]
+      @export_manifests = nil
+    end
+
+    # Pubic: Returns a collection of previously registered export manifests
+    # for this feature.
+    #
+    # Returns an Array<Decidim::Features::ExportManifest>.
+    def export_manifests
+      @export_manifests ||= @exports.map do |(name, block)|
+        Decidim::Features::ExportManifest.new(name).tap do |manifest|
+          block.call(manifest)
+        end
+      end
+    end
+
     # Public: Finds all the registered resource manifest's via the
     # `register_resource` method.
     #
@@ -136,18 +173,22 @@ module Decidim
       @resource_manifests ||= []
     end
 
+    # Public: Stores an instance of StatsRegistry
+    def stats
+      @stats ||= StatsRegistry.new
+    end
+
     # Public: Registers a stat inside a feature manifest.
-    #
-    # These stats can be used anywhere in the application using Decidim.stats_for method.
     #
     # name - The name of the stat
     # options - A hash of options
     #         * primary: Wether the stat is primary or not.
+    #         * priority: The priority of the stat used for render issues.
     # block - A block that receive the features to filter out the stat.
     #
     # Returns nothing.
     def register_stat(name, options = {}, &block)
-      Decidim.register_stat(name, options, block)
+      stats.register(name, options, &block)
     end
   end
 end

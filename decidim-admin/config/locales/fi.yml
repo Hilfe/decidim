@@ -398,7 +398,6 @@ fi:
         hidden: Piilotettu
         hide: Piilota
         not_hidden: Näkyvillä
-        title: Moderoinnit
         unreport: Poista raportointi
       admin:
         reportable:
@@ -412,7 +411,6 @@ fi:
         moderation:
           fields:
             hidden_at: Piilotuksen ajankohta
-            report_count: Raportointimäärä
             reportable: Raportoitava
             reported_content: Raportoitava sisältö
             reports: Raportit

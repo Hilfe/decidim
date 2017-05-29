@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -6,7 +7,7 @@ module Decidim
     describe Comment do
       let!(:commentable) { create(:dummy_resource) }
       let!(:comment) { create(:comment, commentable: commentable) }
-      let!(:replies) { 3.times.map { create(:comment, commentable: comment, root_commentable: commentable) } }
+      let!(:replies) { Array.new(3) { create(:comment, commentable: comment, root_commentable: commentable) } }
       let!(:up_vote) { create(:comment_vote, :up_vote, comment: comment) }
       let!(:down_vote) { create(:comment_vote, :down_vote, comment: comment) }
 

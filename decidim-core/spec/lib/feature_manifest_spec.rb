@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -57,15 +59,50 @@ module Decidim
 
     describe "register_stat" do
       before do
-        allow(Decidim).to receive(:register_stat)
+        allow(subject.stats).to receive(:register)
       end
 
-      it "calls Decidim.register_stat with the same arguments" do
+      it "calls subject.stats with the same arguments" do
+        resolver = proc { 10 }
         options = { primary: true }
-        subject.register_stat :foo, options do
-          10
+        subject.register_stat :foo, options, &resolver
+        expect(subject.stats).to have_received(:register).with(:foo, options, &resolver)
+      end
+    end
+
+    describe "exports" do
+      let(:collection1) { [{ id: 1 }, { id: 2 }] }
+      let(:collection2) { [{ name: "ed" }, { name: "john" }] }
+      let(:serializer) { Class.new }
+
+      before do
+        subject.exports :foos do |exports|
+          exports.collection { collection1 }
+          exports.serializer serializer
         end
-        expect(Decidim).to have_received(:register_stat).with(:foo, options, instance_of(Proc))
+
+        subject.exports :bars do |exports|
+          exports.collection { collection2 }
+        end
+      end
+
+      let(:manifests) { subject.export_manifests }
+
+      describe "#export_manifests" do
+        it "creates manifest instances" do
+          expect(manifests[0]).to be_kind_of(Decidim::Features::ExportManifest)
+          expect(manifests[1]).to be_kind_of(Decidim::Features::ExportManifest)
+        end
+
+        it "initializes instances properly" do
+          expect(manifests[0].name).to eq(:foos)
+          expect(manifests[1].name).to eq(:bars)
+        end
+
+        it "passes through the manifest instance as block parameter" do
+          expect(manifests[0].collection.call).to eq(collection1)
+          expect(manifests[1].collection.call).to eq(collection2)
+        end
       end
     end
   end

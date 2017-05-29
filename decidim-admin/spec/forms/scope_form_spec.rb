@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -15,7 +16,7 @@ module Decidim
       end
       let(:context) do
         {
-          "current_organization" => organization,
+          "current_organization" => organization
         }
       end
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -36,9 +37,7 @@ module Decidim
           let(:oauth_signature) { "1234" }
 
           it "raises a InvalidOauthSignature exception" do
-            expect {
-              command.call
-            }.to raise_error InvalidOauthSignature
+            expect { command.call }.to raise_error InvalidOauthSignature
           end
         end
 

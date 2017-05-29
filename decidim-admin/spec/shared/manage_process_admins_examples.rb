@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.shared_examples "manage process admins examples" do
   let(:other_user) { create :user, organization: organization, email: "my_email@example.org" }
 
@@ -45,7 +46,7 @@ RSpec.shared_examples "manage process admins examples" do
     it "updates a process admin" do
       within "#process_admins" do
         within find("#process_admins tr", text: other_user.email) do
-          page.find('.action-icon--edit').click
+          page.find(".action-icon--edit").click
         end
       end
 
@@ -66,7 +67,7 @@ RSpec.shared_examples "manage process admins examples" do
 
     it "deletes a participatory_process_user_role" do
       within find("#process_admins tr", text: other_user.email) do
-        page.find('a.action-icon--remove').click
+        page.find("a.action-icon--remove").click
       end
 
       within ".callout-wrapper" do

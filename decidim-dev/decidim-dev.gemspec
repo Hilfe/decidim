@@ -12,12 +12,12 @@ Gem::Specification.new do |s|
   s.summary     = "Decidim Dev tools"
   s.description = "Utilities and tools we need to develop Decidim"
 
-  s.files = Dir["{app,config,db,lib,vendor}/**/*", "LICENSE.txt", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib,vendor}/**/*", "Rakefile", "README.md"]
 
   s.add_dependency "decidim", Decidim.version
   s.add_dependency "factory_girl_rails"
   s.add_dependency "database_cleaner", "~> 1.5.0"
-  s.add_dependency "capybara", "~> 2.13.0"
+  s.add_dependency "capybara", "~> 2.14.0"
   s.add_dependency "capybara-screenshot", "~> 1.0.14"
   s.add_dependency "rspec-rails", "~> 3.5"
   s.add_dependency "rspec-repeat", "~> 1.0.2"
@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails-controller-testing", "~> 1.0.1"
   s.add_dependency "simplecov", "~> 0.13"
   s.add_dependency "codecov", "~> 0.1.9"
-  s.add_dependency "rubocop", "~> 0.46.0"
+  s.add_dependency "rubocop", "~> 0.48.1"
   s.add_dependency "db-query-matchers", "~> 0.8.0"
   s.add_dependency "letter_opener_web", "~> 1.3.0"
   s.add_dependency "rspec-html-matchers", "~> 0.9.1"

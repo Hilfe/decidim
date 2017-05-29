@@ -1,5 +1,6 @@
 # coding: utf-8
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -48,8 +49,8 @@ module Decidim
 
       context "when hero_image is too big" do
         before do
-          an_amount_too_large = (Decidim.maximum_attachment_size + 1).megabytes
-          expect(subject.hero_image).to receive(:size).and_return(an_amount_too_large)
+          allow(Decidim).to receive(:maximum_attachment_size).and_return(5.megabytes)
+          expect(subject.hero_image).to receive(:size).and_return(6.megabytes)
         end
 
         it { is_expected.not_to be_valid }

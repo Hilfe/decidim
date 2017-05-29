@@ -7,7 +7,7 @@ module Decidim
   # Helpers meant to be used only during capybara test runs.
   module CapybaraTestHelpers
     def switch_to_host(host = "lvh.me")
-      unless /lvh\.me$/ =~ host
+      unless /lvh\.me$/.match?(host)
         raise "Can't switch to a custom host unless it really exists. Use `whatever.lvh.me` as a workaround."
       end
 
@@ -48,7 +48,6 @@ Capybara::Screenshot::RSpec.add_link_to_screenshot_for_failed_examples = true
 Capybara.configure do |config|
   config.always_include_port = true
   config.default_driver = :poltergeist
-  config.always_include_port = true
 end
 
 RSpec.configure do |config|

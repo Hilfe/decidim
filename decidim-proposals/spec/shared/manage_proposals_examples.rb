@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 # frozen_string_literal: true
+
 RSpec.shared_examples "manage proposals" do
   let(:address) { "Carrer Pare Llaurador 113, baixos, 08224 Terrassa" }
   let(:latitude) { 40.1234 }
   let(:longitude) { 2.1234 }
 
   before do
-    Geocoder::Lookup::Test.add_stub(address, [
-      { 'latitude' => latitude, 'longitude' => longitude }
-    ])
+    Geocoder::Lookup::Test.add_stub(
+      address,
+      [{ "latitude" => latitude, "longitude" => longitude }]
+    )
   end
 
   context "previewing proposals" do
@@ -122,9 +124,9 @@ RSpec.shared_examples "manage proposals" do
           context "when geocoding is enabled" do
             let!(:current_feature) do
               create(:proposal_feature,
-                    :with_geocoding_enabled,
-                    manifest: manifest,
-                    participatory_process: participatory_process)
+                     :with_geocoding_enabled,
+                     manifest: manifest,
+                     participatory_process: participatory_process)
             end
 
             it "creates a new proposal related to the process scope" do
@@ -158,7 +160,7 @@ RSpec.shared_examples "manage proposals" do
 
     context "when official_proposals setting is disabled" do
       before do
-        current_feature.update_attributes(settings: { official_proposals_enabled: false } )
+        current_feature.update_attributes(settings: { official_proposals_enabled: false })
       end
 
       it "cannot create a new proposal" do
@@ -170,7 +172,7 @@ RSpec.shared_examples "manage proposals" do
 
   context "when the proposal_answering feature setting is enabled" do
     before do
-      current_feature.update_attributes(settings: { proposal_answering_enabled: true } )
+      current_feature.update_attributes(settings: { proposal_answering_enabled: true })
     end
 
     context "when the proposal_answering step setting is enabled" do
@@ -235,9 +237,9 @@ RSpec.shared_examples "manage proposals" do
 
       it "can edit a proposal answer" do
         proposal.update_attributes!(
-          state: 'rejected',
+          state: "rejected",
           answer: {
-            'en' => "I don't like it"
+            "en" => "I don't like it"
           },
           answered_at: Time.current
         )
@@ -291,7 +293,7 @@ RSpec.shared_examples "manage proposals" do
 
   context "when the proposal_answering feature setting is disabled" do
     before do
-      current_feature.update_attributes(settings: { proposal_answering_enabled: false } )
+      current_feature.update_attributes(settings: { proposal_answering_enabled: false })
     end
 
     it "cannot answer a proposal" do

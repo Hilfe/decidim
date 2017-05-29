@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "rails/generators"
 require "generators/decidim/app_generator"
 
@@ -48,10 +49,6 @@ module Decidim
       end
 
       private
-
-      def path_to_decidim
-        "/Users/oriol/Code/decidim"
-      end
 
       def remove_directory_if_exists
         remove_dir(path) if File.directory?(path)

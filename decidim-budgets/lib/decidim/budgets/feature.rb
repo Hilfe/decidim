@@ -3,7 +3,7 @@
 require_dependency "decidim/features/namer"
 
 Decidim.register_feature(:budgets) do |feature|
-  feature.engine = Decidim::Budgets::ListEngine
+  feature.engine = Decidim::Budgets::Engine
   feature.admin_engine = Decidim::Budgets::AdminEngine
   feature.icon = "decidim/budgets/icon.svg"
   feature.stylesheet = "decidim/budgets/budgets"
@@ -19,11 +19,13 @@ Decidim.register_feature(:budgets) do |feature|
     resource.template = "decidim/budgets/projects/linked_projects"
   end
 
-  feature.register_stat :projects_count do |features, start_at, end_at|
-    projects = Decidim::Budgets::Project.where(feature: features)
-    projects = projects.where("created_at >= ?", start_at) if start_at.present?
-    projects = projects.where("created_at <= ?", end_at) if end_at.present?
-    projects.count
+  feature.register_stat :projects_count, primary: true do |features, start_at, end_at|
+    Decidim::Budgets::FilteredProjects.for(features, start_at, end_at).count
+  end
+
+  feature.register_stat :comments_count, tag: :comments do |features, start_at, end_at|
+    projects = Decidim::Budgets::FilteredProjects.for(features, start_at, end_at)
+    Decidim::Comments::Comment.where(root_commentable: projects).count
   end
 
   feature.settings(:global) do |settings|

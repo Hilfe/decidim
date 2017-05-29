@@ -105,6 +105,10 @@ en:
       shared:
         omniauth_buttons:
           or: Or
+    export_mailer:
+      export:
+        ready: Please find attached a zipped version of your export.
+      subject: Your export "%{name}" is ready
     features:
       dummy:
         actions:
@@ -274,7 +278,7 @@ en:
         link_label: here
         ok: I agree
       footer:
-        made_with_open_source: Website made with <a target="_blank" href="https://github.com/decidim/decidim">open-source software</a>.
+        made_with_open_source: Website made with <a target="_blank" href="https://github.com/decidim/decidim">free software</a>.
       header:
         close_menu: Close menu
         navigation: Navigation
@@ -319,6 +323,8 @@ en:
         notifications_settings: Notifications settings
         title: User settings
         user_groups: Organizations
+      widget:
+        see_more: "See more"
   locale:
     name: English
   pages:
@@ -351,10 +357,10 @@ en:
         active_step: Active step
         see_all_processes: See all processes
       statistics:
+        comments_count: Comments
         headline: Current state of %{organization}
         meetings_count: Meetings
         processes_count: Processes
-        projects_count: Projects
         proposals_count: Proposals
         results_count: Results
         users_count: Users

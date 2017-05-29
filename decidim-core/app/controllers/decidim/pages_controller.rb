@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_dependency "decidim/application_controller"
 require_dependency "decidim/page_finder"
 
@@ -24,7 +25,7 @@ module Decidim
     end
 
     def promoted_participatory_processes
-      @promoted_processes ||= OrganizationParticipatoryProcesses.new(current_organization) | PublicParticipatoryProcesses.new | PromotedParticipatoryProcesses.new
+      @promoted_processes ||= OrganizationPrioritizedParticipatoryProcesses.new(current_organization) | PromotedParticipatoryProcesses.new
     end
 
     def highlighted_participatory_processes

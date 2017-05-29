@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 if !Rails.env.production? || ENV["SEED"]
   require "decidim/faker/localized"
 
@@ -20,7 +21,7 @@ if !Rails.env.production? || ENV["SEED"]
     reference_prefix: Faker::Name.suffix
   )
 
-  3.times.each do |index|
+  3.times.each do
     Decidim::Scope.create!(
       name: Faker::Address.unique.state,
       organization: organization

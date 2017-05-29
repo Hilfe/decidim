@@ -1,5 +1,6 @@
 # coding: utf-8
 # frozen_string_literal: true
+
 require "spec_helper"
 
 describe "Participatory Process Groups", type: :feature do
@@ -26,7 +27,6 @@ describe "Participatory Process Groups", type: :feature do
 
     it "lists all the groups" do
       within "#processes-grid" do
-
         expect(page).to have_content(translated(participatory_process_group.name, locale: :en))
         expect(page).to have_selector("article.card", count: 1)
 

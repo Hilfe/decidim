@@ -38,7 +38,7 @@ es:
         end_date: Fecha de finalización
         hashtag: Hashtag
         hero_image: Imagen de portada
-        local_area: Áreas muncipales
+        local_area: Áreas municipales
         meta_scope: 'Metadatos: ámbito'
         participatory_process_group_id: Grupo de procesos
         participatory_scope: Ámbito participativo
@@ -104,6 +104,9 @@ es:
         content: Contenido
         slug: Texto corto de URL
         title: Título
+  date:
+    formats:
+      datepicker: "%m/%d/%Y"
   decidim:
     admin:
       actions:
@@ -489,7 +492,7 @@ es:
         hidden: Ocultas
         hide: Esconder
         not_hidden: No ocultas
-        title: Denuncias
+        title: Acciones
         unreport: Cancelar denuncia
       admin:
         reportable:
@@ -503,7 +506,7 @@ es:
         moderation:
           fields:
             hidden_at: Fecha de ocultación
-            report_count: Número de denuncias
+            report_count: Recuento
             reportable: Tipo
             reported_content: Contenido
             reports: Denuncias
@@ -521,4 +524,5 @@ es:
           title: Usuarios
   time:
     formats:
+      datepicker: "%m/%d/%Y"
       timepicker: "%d/%m/%Y %H:%M"

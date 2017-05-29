@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 describe "Organization admins", type: :feature do
@@ -54,7 +55,7 @@ describe "Organization admins", type: :feature do
 
       it "can resend the invitation" do
         within "tr[data-user-id=\"#{user.id}\"]" do
-          page.find('.action-icon.resend-invitation').click
+          page.find(".action-icon.resend-invitation").click
         end
 
         expect(page).to have_content("Invitation email sent successfully")
@@ -64,7 +65,7 @@ describe "Organization admins", type: :feature do
         expect(page).to have_content(other_admin.name)
 
         within "tr[data-user-id=\"#{other_admin.id}\"]" do
-          page.find('.action-icon.action-icon--remove').click
+          page.find(".action-icon.action-icon--remove").click
         end
 
         expect(page).not_to have_content(other_admin.name)

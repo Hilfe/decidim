@@ -1,10 +1,11 @@
 # coding: utf-8
 # frozen_string_literal: true
+
 require "spec_helper"
 
 describe "Participatory Processes", type: :feature do
   let(:organization) { create(:organization) }
-  let!(:participatory_process) do
+  let(:base_process) do
     create(
       :participatory_process,
       organization: organization,
@@ -17,7 +18,18 @@ describe "Participatory Processes", type: :feature do
     switch_to_host(organization.host)
   end
 
+  context "when there are no processes" do
+    before do
+      visit decidim.participatory_processes_path
+    end
+
+    it "shows a messages about the lack of processes" do
+      expect(page).to have_content("No participatory processes yet!")
+    end
+  end
+
   context "when there are some processes" do
+    let!(:participatory_process) { base_process }
     let!(:promoted_process) { create(:participatory_process, :promoted, organization: organization) }
     let!(:unpublished_process) { create(:participatory_process, :unpublished, organization: organization) }
 
@@ -58,8 +70,7 @@ describe "Participatory Processes", type: :feature do
         create(:participatory_process_step,
                :active,
                participatory_process: participatory_process,
-               title: { en: "Active step", ca: "Fase activa", es: "Fase activa" },
-              )
+               title: { en: "Active step", ca: "Fase activa", es: "Fase activa" })
       end
 
       it "links to the active step" do
@@ -74,7 +85,8 @@ describe "Participatory Processes", type: :feature do
     end
   end
 
-  describe "show" do
+  describe "when going to the participatory process page" do
+    let!(:participatory_process) { base_process }
     let!(:published_feature) { create(:feature, :published, participatory_process: participatory_process) }
     let!(:unpublished_feature) { create(:feature, :unpublished, participatory_process: participatory_process) }
 

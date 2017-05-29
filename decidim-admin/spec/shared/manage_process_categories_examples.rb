@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # frozen_string_literal: true
+
 RSpec.shared_examples "manage process categories examples" do
   before do
     switch_to_host(organization.host)
@@ -42,7 +43,7 @@ RSpec.shared_examples "manage process categories examples" do
   it "updates a category" do
     within "#categories" do
       within find("tr", text: translated(category.name)) do
-        page.find('a.action-icon--edit').click
+        page.find("a.action-icon--edit").click
       end
     end
 
@@ -77,7 +78,7 @@ RSpec.shared_examples "manage process categories examples" do
 
       it "deletes a category" do
         within find("tr", text: translated(category2.name)) do
-          page.find('a.action-icon--remove').click
+          page.find("a.action-icon--remove").click
         end
 
         within ".callout-wrapper" do
@@ -99,7 +100,7 @@ RSpec.shared_examples "manage process categories examples" do
 
       it "deletes a category" do
         within find("tr", text: translated(category2.name)) do
-          page.find('a.action-icon--remove').click
+          page.find("a.action-icon--remove").click
         end
 
         within ".callout-wrapper" do

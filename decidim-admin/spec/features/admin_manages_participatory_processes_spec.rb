@@ -16,7 +16,7 @@ describe "Admin manage participatory processes", type: :feature do
 
   it "creates a new participatory_process" do
     within ".secondary-nav__actions" do
-      page.find('a.button').click
+      page.find("a.button").click
     end
 
     within ".new_participatory_process" do
@@ -65,8 +65,8 @@ describe "Admin manage participatory processes", type: :feature do
     end
 
     within ".container" do
-      expect(page).to have_content("My participatory process")
-      expect(page).to have_content(@group_name)
+      expect(page).to have_selector("input[value='My participatory process']")
+      expect(page).to have_selector("option[selected]", text: @group_name)
       expect(page).to have_css("img[src*='#{image1_filename}']")
       expect(page).to have_css("img[src*='#{image2_filename}']")
     end

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_dependency "decidim/admin/application_controller"
 
 module Decidim
@@ -26,7 +27,7 @@ module Decidim
         CreateParticipatoryProcess.call(@form) do
           on(:ok) do |participatory_process|
             flash[:notice] = I18n.t("participatory_processes.create.success", scope: "decidim.admin")
-            redirect_to participatory_process_path(participatory_process)
+            redirect_to edit_participatory_process_path(participatory_process)
           end
 
           on(:invalid) do
@@ -74,6 +75,10 @@ module Decidim
         flash[:notice] = I18n.t("participatory_processes.destroy.success", scope: "decidim.admin")
 
         redirect_to participatory_processes_path
+      end
+
+      def copy
+        @participatory_process ||= collection.find(params[:id])
       end
 
       private

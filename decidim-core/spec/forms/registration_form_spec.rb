@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -33,7 +34,7 @@ module Decidim
         tos_agreement: tos_agreement,
         user_group_name: user_group_name,
         user_group_document_number: user_group_document_number,
-        user_group_phone: user_group_phone,
+        user_group_phone: user_group_phone
       }
     end
 

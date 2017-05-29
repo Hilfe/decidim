@@ -468,7 +468,6 @@ eu:
         hidden: ' Ezkutatuta'
         hide: Ezkutatu
         not_hidden: Ezkutatu gabe
-        title: ' Salaketak'
         unreport: Ezeztatu salaketa
       admin:
         reportable:
@@ -482,7 +481,6 @@ eu:
         moderation:
           fields:
             hidden_at: Ezkutatze-data
-            report_count: Salaketa-kopurua
             reportable: Mota
             reported_content: Edukia
             reports: Salaketak

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 describe "Report Proposal", type: :feature do
@@ -13,7 +14,7 @@ describe "Report Proposal", type: :feature do
 
   let!(:feature) do
     create(:proposal_feature,
-      manifest: manifest,
-      participatory_process: participatory_process)
+           manifest: manifest,
+           participatory_process: participatory_process)
   end
 end

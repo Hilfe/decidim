@@ -31,7 +31,8 @@ en:
             proposal_answering_enabled: Proposal answering enabled
             votes_blocked: Votes blocked
             votes_enabled: Votes enabled
-            votes_hidden: Votes hidden (if votes are enabled, checking this will hide the number of votes)
+            votes_hidden: Votes hidden (if votes are enabled, checking this will hide
+              the number of votes)
     proposals:
       actions:
         answer: Answer
@@ -40,6 +41,8 @@ en:
       admin:
         actions:
           preview: Preview
+        exports:
+          proposals: Proposals
         models:
           proposal:
             name: Proposal

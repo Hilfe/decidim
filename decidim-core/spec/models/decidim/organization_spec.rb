@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
   describe Organization do
     let(:organization) { build(:organization) }
 
-    subject { organization}
+    subject { organization }
 
     before do
       Decidim::HomepageImageUploader.enable_processing = true
@@ -26,11 +27,11 @@ module Decidim
       end
 
       context "when the homepage image is a malicious image" do
-        let(:homepage_image_path) {
+        let(:homepage_image_path) do
           File.expand_path(
             File.join(File.dirname(__FILE__), "..", "..", "..", "..", "decidim-dev", "spec", "support", "malicious.jpg")
           )
-        }
+        end
         subject do
           build(
             :organization,

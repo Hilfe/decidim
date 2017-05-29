@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "foundation_rails_helper/form_builder"
 
 module Decidim
@@ -138,6 +139,10 @@ module Decidim
     # datepicker library
     def date_field(attribute, options = {})
       value = object.send(attribute)
+      data = { datepicker: "" }
+      data[:startdate] = I18n.localize(value, format: :datepicker) if value.present?
+      iso_value = value.present? ? value.strftime("%Y-%m-%d") : ""
+
       template = ""
       template += label(attribute, label_for(attribute))
       template += @template.text_field(
@@ -145,9 +150,9 @@ module Decidim
         attribute,
         options.merge(name: nil,
                       id: "date_field_#{@object_name}_#{attribute}",
-                      data: { datepicker: "", startdate: value })
+                      data: data)
       )
-      template += @template.hidden_field(@object_name, attribute, value: value)
+      template += @template.hidden_field(@object_name, attribute, value: iso_value)
       template += error_and_help_text(attribute, options)
       template.html_safe
     end
@@ -156,7 +161,10 @@ module Decidim
     # datepicker library
     def datetime_field(attribute, options = {})
       value = object.send(attribute)
-      formatted_value = I18n.localize(value, format: :timepicker) if value
+      if value
+        iso_value = value.strftime("%Y-%m-%dT%H:%M:%S")
+        formatted_value = I18n.localize(value, format: :timepicker)
+      end
       template = ""
       template += label(attribute, label_for(attribute))
       template += @template.text_field(
@@ -167,7 +175,7 @@ module Decidim
                       id: "datetime_field_#{@object_name}_#{attribute}",
                       data: { datepicker: "", timepicker: "" })
       )
-      template += @template.hidden_field(@object_name, attribute, value: value)
+      template += @template.hidden_field(@object_name, attribute, value: iso_value)
       template += error_and_help_text(attribute, options)
       template.html_safe
     end

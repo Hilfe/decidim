@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 describe "Authentication", type: :feature, perform_enqueued: true do
@@ -49,16 +50,16 @@ describe "Authentication", type: :feature, perform_enqueued: true do
 
     context "using facebook" do
       let(:verified) { true }
-      let(:omniauth_hash) {
-        OmniAuth::AuthHash.new({
-          provider: 'facebook',
-          uid: '123545',
+      let(:omniauth_hash) do
+        OmniAuth::AuthHash.new(
+          provider: "facebook",
+          uid: "123545",
           info: {
             email: "user@from-facebook.com",
             name: "Facebook User"
           }
-        })
-      }
+        )
+      end
 
       before :each do
         OmniAuth.config.test_mode = true
@@ -84,16 +85,16 @@ describe "Authentication", type: :feature, perform_enqueued: true do
 
     context "using twitter" do
       let(:email) { nil }
-      let(:omniauth_hash) {
-        OmniAuth::AuthHash.new({
-          provider: 'twitter',
-          uid: '123545',
+      let(:omniauth_hash) do
+        OmniAuth::AuthHash.new(
+          provider: "twitter",
+          uid: "123545",
           info: {
             name: "Twitter User",
             email: email
           }
-        })
-      }
+        )
+      end
 
       before :each do
         OmniAuth.config.test_mode = true
@@ -157,16 +158,16 @@ describe "Authentication", type: :feature, perform_enqueued: true do
     end
 
     context "using google" do
-      let(:omniauth_hash) {
-        OmniAuth::AuthHash.new({
-          provider: 'google_oauth2',
-          uid: '123545',
+      let(:omniauth_hash) do
+        OmniAuth::AuthHash.new(
+          provider: "google_oauth2",
+          uid: "123545",
           info: {
             name: "Google User",
             email: "user@from-google.com"
           }
-        })
-      }
+        )
+      end
 
       before :each do
         OmniAuth.config.test_mode = true
@@ -311,17 +312,17 @@ describe "Authentication", type: :feature, perform_enqueued: true do
     let(:user) { create(:user, :confirmed, organization: organization) }
     let(:identity) { create(:identity, user: user, provider: "facebook", uid: "12345") }
 
-    let(:omniauth_hash) {
-        OmniAuth::AuthHash.new({
-          provider: identity.provider,
-          uid: identity.uid,
-          info: {
-            email: user.email,
-            name: "Facebook User",
-            verified: true
-          }
-        })
-      }
+    let(:omniauth_hash) do
+      OmniAuth::AuthHash.new(
+        provider: identity.provider,
+        uid: identity.uid,
+        info: {
+          email: user.email,
+          name: "Facebook User",
+          verified: true
+        }
+      )
+    end
 
     before :each do
       OmniAuth.config.test_mode = true
@@ -372,17 +373,17 @@ describe "Authentication", type: :feature, perform_enqueued: true do
     let(:user) { create(:user, :confirmed) }
     let(:identity) { create(:identity, user: user, provider: "facebook", uid: "12345") }
 
-    let(:omniauth_hash) {
-        OmniAuth::AuthHash.new({
-          provider: identity.provider,
-          uid: identity.uid,
-          info: {
-            email: user.email,
-            name: "Facebook User",
-            verified: true
-          }
-        })
-      }
+    let(:omniauth_hash) do
+      OmniAuth::AuthHash.new(
+        provider: identity.provider,
+        uid: identity.uid,
+        info: {
+          email: user.email,
+          name: "Facebook User",
+          verified: true
+        }
+      )
+    end
 
     before :each do
       OmniAuth.config.test_mode = true

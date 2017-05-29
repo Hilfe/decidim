@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe Decidim::Admin::CreateParticipatoryProcessAdmin do
@@ -9,7 +11,7 @@ describe Decidim::Admin::CreateParticipatoryProcessAdmin do
   let!(:current_user) { create :user, email: "some_email@example.org", organization: my_process.organization }
   let(:form) do
     double(
-      :invalid? => invalid,
+      invalid?: invalid,
       email: email,
       role: role,
       name: name

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 describe "Admin invite", type: :feature do
@@ -6,11 +7,11 @@ describe "Admin invite", type: :feature do
     Decidim::System::RegisterOrganizationForm.new(params)
   end
 
-  let(:homepage_image_path) {
+  let(:homepage_image_path) do
     File.expand_path(
       File.join(File.dirname(__FILE__), "..", "..", "..", "decidim-dev", "spec", "support", "city.jpeg")
     )
-  }
+  end
 
   let(:params) do
     {
@@ -26,8 +27,8 @@ describe "Admin invite", type: :feature do
     }
   end
 
-  before(:each) do
-    expect{ Decidim::System::RegisterOrganization.new(form).call }.to broadcast(:ok)
+  before do
+    expect { Decidim::System::RegisterOrganization.new(form).call }.to broadcast(:ok)
     switch_to_host("decide.lvh.me")
   end
 
@@ -42,7 +43,7 @@ describe "Admin invite", type: :feature do
       end
 
       within ".callout-wrapper" do
-        page.find('.close-button').click
+        page.find(".close-button").click
       end
 
       expect(page).to have_content("DASHBOARD")

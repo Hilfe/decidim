@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -14,7 +15,7 @@ module Decidim
         let(:provider) { "facebook" }
         let(:uid) { "12345" }
         let(:email) { "user@from-facebook.com" }
-        let!(:user) { create(:user, organization: organization, email: email)}
+        let!(:user) { create(:user, organization: organization, email: email) }
 
         subject do
           post :create, params: {

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -9,7 +10,6 @@ module Decidim
 
       before do
         @request.env["decidim.current_organization"] = organization
-        @request.env["devise.mapping"] = Devise.mappings[:user]
       end
 
       describe "GET show" do

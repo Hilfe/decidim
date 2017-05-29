@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Decidim
   module Admin
     module Features
@@ -9,6 +10,8 @@ module Decidim
         include Concerns::ParticipatoryProcessAdmin
         include NeedsParticipatoryProcess
         include FeatureSettings
+
+        helper Decidim::Admin::ExportsHelper
 
         helper_method :current_feature,
                       :current_participatory_process,

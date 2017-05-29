@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe Decidim::Budgets::RemoveLineItem do
@@ -5,7 +7,7 @@ describe Decidim::Budgets::RemoveLineItem do
   let(:feature) do
     create(:budget_feature,
            organization: user.organization,
-           settings: { "total_budget" => 100_000, "vote_threshold_percent": 50})
+           settings: { "total_budget" => 100_000, "vote_threshold_percent": 50 })
   end
   let(:project) { create(:project, feature: feature, budget: 100) }
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.shared_examples "with participatory processes" do
   before do
     @request.env["decidim.current_organization"] = organization
@@ -66,7 +67,7 @@ RSpec.shared_examples "with promoted participatory processes" do
           organization: organization
         )
 
-        unpromoted = create(
+        _unpromoted = create(
           :participatory_process,
           :with_steps,
           :unpublished,
@@ -107,6 +108,49 @@ RSpec.shared_examples "with promoted participatory processes" do
         expect(controller.helpers.promoted_participatory_processes.first).to eq(first)
         expect(controller.helpers.promoted_participatory_processes.to_a[1]).to eq(second)
         expect(controller.helpers.promoted_participatory_processes.to_a.last).to eq(last)
+      end
+    end
+  end
+end
+
+RSpec.shared_examples "with participatory processes and groups" do
+  before do
+    @request.env["decidim.current_organization"] = organization
+  end
+
+  let(:other_organization) { create(:organization) }
+
+  describe "helper methods" do
+    describe "collection" do
+      it "includes a heterogeneous array of processes and groups" do
+        published = create_list(
+          :participatory_process,
+          2,
+          :published,
+          organization: organization
+        )
+
+        _unpublished = create_list(
+          :participatory_process,
+          2,
+          :unpublished,
+          organization: organization
+        )
+
+        organization_groups = create_list(
+          :participatory_process_group,
+          2,
+          organization: organization
+        )
+
+        _other_groups = create_list(
+          :participatory_process_group,
+          2,
+          organization: other_organization
+        )
+
+        expect(controller.helpers.collection).to \
+          contain_exactly(*published, *organization_groups)
       end
     end
   end

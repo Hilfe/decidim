@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -11,9 +12,9 @@ module Decidim
           {
             participatory_process: {
               id: my_process.id,
-              title_en: 'Foo title',
-              title_ca: 'Foo title',
-              title_es: 'Foo title',
+              title_en: "Foo title",
+              title_ca: "Foo title",
+              title_es: "Foo title",
               subtitle_en: my_process.subtitle,
               subtitle_ca: my_process.subtitle,
               subtitle_es: my_process.subtitle,
@@ -57,7 +58,7 @@ module Decidim
             command.call
             my_process.reload
 
-            expect(my_process.title['en']).not_to eq("Foo title")
+            expect(my_process.title["en"]).not_to eq("Foo title")
           end
         end
 
@@ -90,7 +91,7 @@ module Decidim
             expect { command.call }.to broadcast(:ok)
             my_process.reload
 
-            expect(my_process.title['en']).to eq("Foo title")
+            expect(my_process.title["en"]).to eq("Foo title")
           end
 
           context "when no homepage image is set" do

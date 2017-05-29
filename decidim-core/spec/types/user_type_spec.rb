@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 require "decidim/api/test/type_context"
 
@@ -17,7 +18,7 @@ module Decidim
     end
 
     describe "avatarUrl" do
-      let (:query) { "{ avatarUrl }" }
+      let(:query) { "{ avatarUrl }" }
 
       it "returns the user avatar url" do
         expect(response).to include("avatarUrl" => model.avatar.url)
@@ -25,7 +26,7 @@ module Decidim
     end
 
     describe "organizationName" do
-      let (:query) { "{ organizationName }" }
+      let(:query) { "{ organizationName }" }
 
       it "returns the user's organization name" do
         expect(response).to include("organizationName" => model.organization.name)

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 describe "Account", type: :feature, perform_enqueued: true do
@@ -91,15 +92,15 @@ describe "Account", type: :feature, perform_enqueued: true do
 
       it "updates the user's notifications" do
         within ".switch.comments_notifications" do
-          page.find('.switch-paddle').click
+          page.find(".switch-paddle").click
         end
 
         within ".switch.replies_notifications" do
-          page.find('.switch-paddle').click
+          page.find(".switch-paddle").click
         end
 
         within ".switch.newsletter_notifications" do
-          page.find('.switch-paddle').click
+          page.find(".switch-paddle").click
         end
 
         within "form.edit_user" do

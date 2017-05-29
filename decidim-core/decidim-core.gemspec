@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.description = "Adds core features so other engines can hook into the framework."
   s.license     = "AGPLv3"
 
-  s.files = Dir["{app,config,db,lib,vendor}/**/*", "LICENSE.txt", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,db,lib,vendor}/**/*", "Rakefile", "README.md"]
 
   s.add_dependency "rails", *Decidim.rails_version
   s.add_dependency "devise", "~> 4.2"
@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
   s.add_dependency "premailer-rails", "~> 1.9.5"
   s.add_dependency "nokogiri", "~> 1.7.1"
   s.add_dependency "geocoder", "~> 1.4.2"
+  s.add_dependency "rubyzip", "1.2.1"
 
   s.add_dependency "decidim-api", Decidim.version
 

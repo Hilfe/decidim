@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 
 module Decidim
@@ -14,19 +15,19 @@ module Decidim
     describe "validations" do
       context "when the file is too big" do
         before do
-          an_amount_too_large = (Decidim.maximum_attachment_size + 1).megabytes
-          expect(subject.file).to receive(:size).and_return(an_amount_too_large)
+          allow(Decidim).to receive(:maximum_attachment_size).and_return(5.megabytes)
+          expect(subject.file).to receive(:size).and_return(6.megabytes)
         end
 
         it { is_expected.not_to be_valid }
       end
 
       context "when the file is a malicious image" do
-        let(:attachment_path) {
+        let(:attachment_path) do
           File.expand_path(
             File.join(File.dirname(__FILE__), "..", "..", "..", "..", "decidim-dev", "spec", "support", "malicious.jpg")
           )
-        }
+        end
         subject do
           build(
             :attachment,

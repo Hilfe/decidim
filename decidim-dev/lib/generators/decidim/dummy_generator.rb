@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "rails/generators"
 require "generators/decidim/app_generator"
 
@@ -39,6 +40,8 @@ module Decidim
           "--skip-bundle",
           "--skip-git",
           "--skip-keeps",
+          "--skip-listen",
+          "--skip-spring",
           "--skip-test",
           "--recreate_db"
         ]

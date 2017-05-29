@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # frozen_string_literal: true
+
 require "decidim/core/engine"
 require "decidim/core/version"
 require "decidim/core/api"
@@ -24,6 +25,9 @@ module Decidim
   autoload :HasCategory, "decidim/has_category"
   autoload :HasReference, "decidim/has_reference"
   autoload :Attributes, "decidim/attributes"
+  autoload :StatsRegistry, "decidim/stats_registry"
+  autoload :Exporters, "decidim/exporters"
+  autoload :FileZipper, "decidim/file_zipper"
 
   include ActiveSupport::Configurable
 
@@ -79,7 +83,7 @@ module Decidim
 
   # Exposes a configuration option: The application name String.
   config_accessor :available_locales do
-    %w(en ca es eu fi)
+    %w(en ca es eu fi fr nl)
   end
 
   # Exposes a configuration option: an object to configure geocoder
@@ -156,34 +160,8 @@ module Decidim
     @resource_manifests ||= feature_manifests.flat_map(&:resource_manifests)
   end
 
-  # Public: Stores all the registered stats
-  #
-  # Returns a Hash where each key is the name of the registered stat and
-  # the value is another Hash containing some stats properties.
+  # Public: Stores an instance of StatsRegistry
   def self.stats
-    @stats ||= {}
-  end
-
-  # Public: Register a stat
-  #
-  # name - The name of the stat
-  # options - A hash of options
-  #         * primary: Wether the stat is primary or not.
-  # block - A block that receive the features to filter out the stat.
-  def self.register_stat(name, options = {}, block)
-    stats[name] = { primary: options.fetch(:primary, false), block: block }
-  end
-
-  # Public: Returns a number returned by executing the corresponding block.
-  #
-  # name - The name of the stat
-  # features - An array of Decidim::Feature
-  # start_at - A date to filter resources created after it
-  # end_at - A date to filter resources created before it.
-  #
-  # Returns the result of executing the stats block using the passing features or an error.
-  def self.stats_for(name, features, start_at = nil, end_at = nil)
-    return stats[name][:block].call(features, start_at, end_at) if stats[name].present?
-    raise StandardError, "Stats '#{name}' is not registered."
+    @stats ||= StatsRegistry.new
   end
 end

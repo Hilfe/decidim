@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "rails"
 require "active_support/all"
 
@@ -117,6 +118,19 @@ module Decidim
             # :cache => Redis.new,
             # :cache_prefix => "..."
           )
+        end
+      end
+
+      initializer "decidim.stats" do
+        Decidim.stats.register :users_count, priority: StatsRegistry::HIGH_PRIORITY do |organization, start_at, end_at|
+          StatsUsersCount.for(organization, start_at, end_at)
+        end
+
+        Decidim.stats.register :processes_count, priority: StatsRegistry::HIGH_PRIORITY do |organization, start_at, end_at|
+          processes = OrganizationPrioritizedParticipatoryProcesses.new(organization)
+          processes = processes.where("created_at >= ?", start_at) if start_at.present?
+          processes = processes.where("created_at <= ?", end_at) if end_at.present?
+          processes.count
         end
       end
     end

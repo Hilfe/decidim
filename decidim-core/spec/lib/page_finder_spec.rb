@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require "spec_helper"
 require_dependency "decidim/page_finder"
 
@@ -23,7 +24,7 @@ module Decidim
     end
 
     describe "find" do
-      subject { finder.find  }
+      subject { finder.find }
 
       context "when a page exists for the slug" do
         before do
