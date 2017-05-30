@@ -24,6 +24,9 @@
       <p class="text-center">
         <%= link_to t('.sign_up'), decidim.new_user_registration_path, class: "sign-up-link" %>
       </p>
+      <% if current_participatory_process.id == 1 %>
+      <h2 class="text-center"> Si no deseas registarte en erabaki.pamplona.es, puedes votar desde la página del  <a href="http://pamplona.es/" target="_blank">Ayuntamiento</a>  </h2>
+      <% end %>
     </div>
   </div>
 </div>
