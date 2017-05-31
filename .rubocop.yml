@@ -454,6 +454,7 @@ Style/EmptyLinesAroundModuleBody:
 # AutoCorrectEncodingComment must match the regex
 # /#.*coding\s?[:=]\s?(?:UTF|utf)-8/
 Style/Encoding:
+  Enabled: true
   EnforcedStyle: never
   SupportedStyles:
     - when_needed
@@ -1291,13 +1292,13 @@ Rails/Validation:
 Metrics/BlockLength:
   Exclude:
     - 'decidim-admin/app/controllers/decidim/admin/concerns/has_attachments.rb'
+    - 'decidim-admin/lib/decidim/admin/engine.rb'
     - 'decidim-api/lib/decidim/api/schema.rb'
-    - 'decidim-core/app/controllers/concerns/decidim/needs_authorization.rb'
-    - 'decidim-core/app/controllers/concerns/decidim/filter_resource.rb'
     - 'decidim-core/config/initializers/devise.rb'
     - 'decidim-core/lib/decidim/core/api/translated_field_type.rb'
     - 'decidim-core/lib/decidim/resourceable.rb'
     - 'decidim-comments/lib/decidim/comments/api/comment_type.rb'
+    - 'decidim-*/app/controllers/concerns/**/*'
     - 'decidim-*/**/routes.rb'
     - 'decidim-*/**/*/types/**/*'
     - 'decidim-*/lib/**/*/test/**/*'

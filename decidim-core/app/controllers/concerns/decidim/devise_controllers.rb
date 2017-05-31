@@ -20,6 +20,8 @@ module Decidim
       helper Decidim::LanguageChooserHelper
       helper Decidim::CookiesHelper
       helper Decidim::ReplaceButtonsHelper
+      helper Decidim::LayoutHelper
+      helper Decidim::MenuHelper
 
       layout "layouts/decidim/application"
     end

@@ -379,6 +379,26 @@ describe "Proposals", type: :feature do
       expect(page).to have_css(".card--proposal", count: 3)
     end
 
+    context "when voting phase is over" do
+      let!(:feature) do
+        create(:proposal_feature,
+               :with_votes_blocked,
+               manifest: manifest,
+               participatory_process: participatory_process)
+      end
+
+      it "lists the proposals ordered by votes by default" do
+        most_voted_proposal = create(:proposal, feature: feature)
+        create_list(:proposal_vote, 3, proposal: most_voted_proposal)
+        less_voted_proposal = create(:proposal, feature: feature)
+
+        visit_feature
+
+        expect(page).to have_selector("#proposals .card-grid .column:first-child", text: most_voted_proposal.title)
+        expect(page).to have_selector("#proposals .card-grid .column:last-child", text: less_voted_proposal.title)
+      end
+    end
+
     context "when there are a lot of proposals" do
       before do
         create_list(:proposal, 17, feature: feature)
@@ -389,7 +409,7 @@ describe "Proposals", type: :feature do
 
         expect(page).to have_css(".card--proposal", count: 12)
 
-        find(".pagination-next a").click
+        click_link "Next"
 
         expect(page).to have_selector(".pagination .current", text: "2")
 
@@ -579,18 +599,12 @@ describe "Proposals", type: :feature do
     end
 
     context "when ordering" do
-      context "by 'most_support'" do
+      context "by 'most_voted'" do
         let!(:feature) do
           create(:proposal_feature,
                  :with_votes_enabled,
                  manifest: manifest,
                  participatory_process: participatory_process)
-        end
-
-        before do
-          proposals.each do |proposal|
-            create(:proposal_vote, proposal: proposal)
-          end
         end
 
         it "lists the proposals ordered by votes" do
@@ -601,13 +615,13 @@ describe "Proposals", type: :feature do
           visit_feature
 
           within ".order-by" do
-            page.find(".dropdown.menu .is-dropdown-submenu-parent").hover
+            expect(page).to have_selector("ul[data-dropdown-menu$=dropdown-menu]", text: "Random")
+            page.find("a", text: "Random").click
+            click_link "Most voted"
           end
 
-          click_link "Most voted"
-
-          expect(page.find("#proposals .card-grid .column:first-child", text: most_voted_proposal.title)).to be
-          expect(page.find("#proposals .card-grid .column:last-child", text: less_voted_proposal.title)).to be
+          expect(page).to have_selector("#proposals .card-grid .column:first-child", text: most_voted_proposal.title)
+          expect(page).to have_selector("#proposals .card-grid .column:last-child", text: less_voted_proposal.title)
         end
       end
 
@@ -619,13 +633,13 @@ describe "Proposals", type: :feature do
           visit_feature
 
           within ".order-by" do
-            page.find(".dropdown.menu .is-dropdown-submenu-parent").hover
+            expect(page).to have_selector("ul[data-dropdown-menu$=dropdown-menu]", text: "Random")
+            page.find("a", text: "Random").click
+            click_link "Recent"
           end
 
-          click_link "Recent"
-
-          expect(page.find("#proposals .card-grid .column:first-child", text: recent_proposal.title)).to be
-          expect(page.find("#proposals .card-grid .column:last-child", text: older_proposal.title)).to be
+          expect(page).to have_selector("#proposals .card-grid .column:first-child", text: recent_proposal.title)
+          expect(page).to have_selector("#proposals .card-grid .column:last-child", text: older_proposal.title)
         end
       end
     end

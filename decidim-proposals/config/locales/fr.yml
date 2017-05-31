@@ -33,7 +33,6 @@ fr:
     proposals:
       actions:
         answer: Répondre
-        export: Exporter
         new: Nouveau
         title: Actions
       admin:
@@ -69,8 +68,6 @@ fr:
       create:
         error: Il y a eu des erreurs lors de la sauvegarde de la proposition.
         success: Proposition créée avec succès.
-      exports:
-        notice: Votre exportation est en cours. Vous recevrez un e-mail quand elle sera terminée.
       models:
         proposal:
           fields:
@@ -121,8 +118,6 @@ fr:
           most_voted: Les plus votées
           random: Aléatoire
           recent: Les plus récents
-        proposal:
-          view_proposal: Voir la proposition
         show:
           proposal_accepted_reason: 'Cette proposition a été acceptée parce que :'
           proposal_rejected_reason: 'Cette proposition a été refusée parce que:'
