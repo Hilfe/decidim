@@ -224,6 +224,7 @@ es:
       login_modal:
         please_sign_in: Por favor, regístrate
         sign_up: Regístrate
+        vote_without_register: Vota sin registrarte
       reference:
         reference: 'Referencia: %{reference}'
       share_modal:

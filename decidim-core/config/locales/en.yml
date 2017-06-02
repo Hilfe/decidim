@@ -225,6 +225,7 @@ en:
       login_modal:
         please_sign_in: Please sign in
         sign_up: Sign up
+        vote_without_register: Vota sin registrarte.
       reference:
         reference: 'Reference: %{reference}'
       share_modal:

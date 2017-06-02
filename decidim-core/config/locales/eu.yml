@@ -224,6 +224,7 @@ eu:
       login_modal:
         please_sign_in: Mesedez, erregistratu
         sign_up: Erregistratu
+        vote_without_register: Erregistratu gabe bozkatu
       reference:
         reference: 'Erreferentzia: %{reference}'
       share_modal:
