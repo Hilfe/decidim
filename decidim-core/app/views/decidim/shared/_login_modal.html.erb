@@ -22,8 +22,25 @@
         </div>
       <% end %>
       <p class="text-center">
-        <%= link_to t('.sign_up'), decidim.new_user_registration_path, class: "sign-up-link" %>
+        <%= link_to t('.sign_up'), decidim.new_user_registration_path, class: "button expanded" %>
       </p>
+      <% if (defined? current_participatory_process.id) && current_participatory_process.id == 9 %>
+        <% if (defined? @proposal) %>
+          <% case  @proposal.id
+          when 34 %><p class="text-center">
+              <%= link_to t('.vote_without_register'), 'http://sanfermin.pamplona.es/carteles/Datos_txupinazo.asp?opcion=1&ORIGEN=WEB&Idioma=1', class: "button expanded" %></p>
+            <%when 33 %><p class="text-center">
+              <%= link_to t('.vote_without_register'), 'http://sanfermin.pamplona.es/carteles/Datos_txupinazo.asp?opcion=2&ORIGEN=WEB&Idioma=1', class: "button expanded" %></p>
+            <%when 32 %><p class="text-center">
+              <%= link_to t('.vote_without_register'), 'http://sanfermin.pamplona.es/carteles/Datos_txupinazo.asp?opcion=3&ORIGEN=WEB&Idioma=1', class: "button expanded" %></p>
+            <%when 31 %><p class="text-center">
+              <%= link_to t('.vote_without_register'), 'http://sanfermin.pamplona.es/carteles/Datos_txupinazo.asp?opcion=4&ORIGEN=WEB&Idioma=1', class: "button expanded" %></p>
+          <%end%>
+        <%else%>
+          <p class="text-center">
+            <%= link_to t('.vote_without_register'), 'http://sanfermin.pamplona.es/carteles/chupinazo.asp', class: "button expanded" %></p>
+        <%end%>
+      <%end%>
     </div>
   </div>
 </div>
